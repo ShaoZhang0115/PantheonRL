@@ -21,7 +21,7 @@ class DummyEnv(gym.Env):
     action_space: gym.spaces.Space
 
 
-class MultiAgentEnv(gym.Env, ABC):
+class MultiAgentEnv(gym.Env):
     """
     Base class for all Multi-agent environments.
 
@@ -274,7 +274,7 @@ class MultiAgentEnv(gym.Env, ABC):
         """
 
 
-class TurnBasedEnv(MultiAgentEnv, ABC):
+class TurnBasedEnv(MultiAgentEnv):
     """
     Base class for all 2-player turn-based games.
 
@@ -370,7 +370,7 @@ class TurnBasedEnv(MultiAgentEnv, ABC):
         """
 
 
-class SimultaneousEnv(MultiAgentEnv, ABC):
+class SimultaneousEnv(MultiAgentEnv):
     """
     Base class for all 2-player simultaneous games.
 

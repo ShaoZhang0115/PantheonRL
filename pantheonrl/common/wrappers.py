@@ -79,7 +79,7 @@ class MultiRecorder(ABC):
         """ Get the transitions that have been recorded """
 
 
-class TurnBasedRecorder(TurnBasedEnv, MultiRecorder):
+class TurnBasedRecorder(TurnBasedEnv):
     """
     Recorder for all turn-based environments
 
@@ -160,7 +160,7 @@ class TurnBasedRecorder(TurnBasedEnv, MultiRecorder):
                 )
 
 
-class SimultaneousRecorder(SimultaneousEnv, MultiRecorder):
+class SimultaneousRecorder(SimultaneousEnv):
     """
     Recorder for all turn-based environments
 
