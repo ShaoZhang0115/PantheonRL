@@ -1,3 +1,7 @@
+# newPantheonRL
+
+Update the lastesr overcooked_ai enviornment.
+
 # PantheonRL
 
 PantheonRL is a package for training and testing multi-agent reinforcement learning environments. The goal of PantheonRL is to provide a modular and extensible framework for training agent policies, fine-tuning agent policies, ad-hoc pairing of agents, and more. PantheonRL also provides a web user interface suitable for lightweight experimentation and prototyping.
@@ -25,6 +29,11 @@ In Proceedings of the 36th AAAI Conference on Artificial Intelligence (Demo Trac
 ```
 
 -----
+## Aim Visualization
+```
+aim convert tensorboard --logdir ~/PantheonRL/logs
+aim up
+```
 
 ## Installation
 ```
