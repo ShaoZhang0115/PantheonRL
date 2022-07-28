@@ -25,6 +25,11 @@ In Proceedings of the 36th AAAI Conference on Artificial Intelligence (Demo Trac
 ```
 
 -----
+## Aim Visualization
+```
+aim convert tensorboard --logdir ~/PantheonRL/logs
+aim up
+```
 
 ## Installation
 ```

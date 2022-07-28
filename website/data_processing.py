@@ -12,6 +12,8 @@ from os.path import isfile, join
 from website.constants import PARTNER_LIST, ENV_TO_NAME, TB_PORT, ADAP_TYPES
 import subprocess
 import signal
+from aim.tensorflow import AimCallback
+from aim.keras import AimCallback
 
 def savedpartnerpath(id, env, name, ptype):
     return f"./data/user{id}/{env}/fixedpartners/{ptype}/{name}"

@@ -7,6 +7,8 @@ import time
 import numpy as np
 import torch as th
 
+import aim
+
 from .util import action_from_policy, clip_actions, resample_noise
 from .trajsaver import TransitionsMinimal
 
@@ -19,6 +21,9 @@ from stable_baselines3.common.on_policy_algorithm import OnPolicyAlgorithm
 from stable_baselines3.common.off_policy_algorithm import OffPolicyAlgorithm
 from stable_baselines3.common.utils import safe_mean
 
+from aim import run
+
+run = aim.Run(experiment='test_ppo')
 
 class Agent(ABC):
     """
@@ -141,6 +146,7 @@ class OnPolicyAgent(Agent):
                     lens = [ep["l"] for ep in self.model.ep_info_buffer]
                     self.model.logger.record(
                         "rollout/ep_rew_mean", safe_mean(rews))
+                    run.track(safe_mean(rews), 'rollout/ep_rew_mean', step=self.model.n_steps)
                     self.model.logger.record(
                         "rollout/ep_len_mean", safe_mean(lens))
                     self.model.ep_info_buffer.append(last_exclude)

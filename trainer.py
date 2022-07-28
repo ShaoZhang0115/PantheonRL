@@ -1,7 +1,7 @@
 import argparse
 import json
 import gym
-
+import aim
 import torch as th
 
 from stable_baselines3 import PPO
@@ -25,6 +25,10 @@ from pantheonrl.envs.blockworldgym import simpleblockworld, blockworld
 from pantheonrl.envs.liargym.liar import LiarEnv, LiarDefaultAgent
 
 from overcookedgym.overcooked_utils import LAYOUT_LIST
+
+from aim import Run
+
+
 
 ENV_LIST = ['RPS-v0', 'BlockEnv-v0', 'BlockEnv-v1', 'LiarsDice-v0',
             'OvercookedMultiEnv-v0']
@@ -430,3 +434,4 @@ if __name__ == '__main__':
                     partners[i].model.save(f"{args.alt_save}/{i}")
                 except AttributeError:
                     print("FIXED or DEFAULT partners are not saved")
+

@@ -1,3 +1,4 @@
+from cProfile import run
 import time
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
 
@@ -18,6 +19,10 @@ from stable_baselines3.common.type_aliases import GymEnv, MaybeCallback, Schedul
 from stable_baselines3.common.utils import safe_mean
 from stable_baselines3.common.vec_env import VecEnv
 from stable_baselines3.common.utils import explained_variance, get_schedule_fn
+
+import aim
+
+run = aim.Run(experiment='test_ppo')
 
 class ModularAlgorithm(OnPolicyAlgorithm):
     """
@@ -338,6 +343,9 @@ class ModularAlgorithm(OnPolicyAlgorithm):
         self.logger.record("train/entropy_loss", np.mean(entropy_losses))
         self.logger.record("train/policy_gradient_loss", np.mean(pg_losses))
         self.logger.record("train/value_loss", np.mean(value_losses))
+        run.track(np.mean(entropy_losses), "train/entropy_loss", step=self.n_steps)
+        run.track(np.mean(pg_losses), "train/policy_gradient_loss", step=self.n_steps)
+        run.track(np.mean(value_losses), "train/value_loss", step=self.n_steps)
         # self.logger.record("train/approx_kl", np.mean(approx_kl_divs))
         # self.logger.record("train/clip_fraction", np.mean(clip_fractions))
         # self.logger.record("train/loss", loss.item())
@@ -392,6 +400,7 @@ class ModularAlgorithm(OnPolicyAlgorithm):
                 if len(self.ep_info_buffer) > 0 and len(self.ep_info_buffer[0]) > 0:
                     self.logger.record("rollout/ep_rew_mean", safe_mean([ep_info["r"] for ep_info in self.ep_info_buffer]))
                     self.logger.record("rollout/ep_len_mean", safe_mean([ep_info["l"] for ep_info in self.ep_info_buffer]))
+                    run.track(safe_mean([ep_info["r"] for ep_info in self.ep_info_buffer]), "rollout/ep_rew_mean", step=self.n_steps)
                 self.logger.record("time/fps", fps)
                 self.logger.record("time/time_elapsed", int(time.time() - self.start_time), exclude="tensorboard")
                 self.logger.record("time/total_timesteps", self.num_timesteps, exclude="tensorboard")
